@@ -42,7 +42,7 @@ def stretchKey(key, separatorKey):
     return stretched_key
 
 
-# A função "fileKeysAndDataSeparator" separa o conjunto de chaves dos dados do arquivo
+# A função "separatorOfKeysAndData" separa o conjunto de chaves dos dados do arquivo
 def separatorOfKeysAndData(setOfKeysPlusData_ascii):
     keys_Separator_Data_ascii2x = number_ascii(setOfKeysPlusData_ascii)
 
@@ -155,7 +155,7 @@ def decryptStream(fIn, fOut, privateKey):
 
     # valida a chave privada
     if not validatePrivateKey(int(privateKey), int(publicKey_decrypted), int(phiKey_decrypted)):
-        raise ValueError("\n>>> Senha Errada (ou arquivo está corrompido).")
+        raise ValueError("\n>>> Chave Privada Errada (ou arquivo está corrompido).")
 
     # descriptografia RSA
     unlockedFileData = unlock(fData_ascii, int(privateKey), int(modularKey_decrypted))

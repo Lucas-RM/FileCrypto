@@ -33,11 +33,11 @@ def Random_p_q():
         return p, q
 
 
-def MDC(a, b):
-    if a == 0:
-        return b
+def MDC(num1, num2):
+    if num1 == 0:
+        return num2
     else:
-        gdc = MDC(b % a, a)
+        gdc = MDC(num2 % num1, num1)
         return gdc
 
 
@@ -51,11 +51,14 @@ def publicKey(phi):
     id = False
     p_key = 0
     i = 1 + secrets.randbelow(phi - 1) % 100
+
     while id != True:
         i += 1
+
         if MDC(phi, i) == 1:
             id = True
             p_key = i
+
     return p_key
 
 
@@ -78,31 +81,32 @@ def generator():
 
 
 # Encriptador
-def lock(text, e, n):
-    c = ""
+def lock(text, public_key, modular_key):
+    text_lock = ""
+
     for i in text:
-        x = (ord(i) ** e) % n
-        k = CHAR_SIZE - len(str(x))
+        char_lock = (ord(i) ** public_key) % modular_key
+        CHAR_LOCK_SIZE = CHAR_SIZE - len(str(char_lock))
 
-        while k > 0:
-            c += "0"
-            k -= 1
+        while CHAR_LOCK_SIZE > 0:
+            text_lock += "0"
+            CHAR_LOCK_SIZE -= 1
 
-        c += str(x)
+        text_lock += str(char_lock)
 
-    return c
+    return text_lock
 
 
 # Decriptador
-def unlock(text, d, n):
-    m = ""
-    u = ""
+def unlock(text, private_key, modular_key):
+    text_unlock = ""
+    CHAR_COUNT = ""
 
     for i in text:
-        u += i
+        CHAR_COUNT += i
 
-        if len(u) == CHAR_SIZE:
-            m += chr((int(u) ** d) % n)
-            u = ""
+        if len(CHAR_COUNT) == CHAR_SIZE:
+            text_unlock += chr((int(CHAR_COUNT) ** private_key) % modular_key)
+            CHAR_COUNT = ""
 
-    return m
+    return text_unlock

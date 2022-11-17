@@ -29,7 +29,7 @@ def SelectFile():
         return selectedFile  # retorna o arquivo selecionado
 
 
-# A função "SelectFile" seleciona pasta
+# A função "SelectDirectory" seleciona pasta
 def SelectDirectory():
     root = TkinterConfig(Tk(), "Select Directory")
 

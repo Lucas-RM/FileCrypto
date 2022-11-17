@@ -5,7 +5,7 @@ from filedirectorydialog import SelectFile, SelectDirectory, createFile, ToBacku
     FileValidation, ReplaceExistingFileInput, Exists, FileName
 
 
-def PasswordValidation(key):
+def PrivateKeyValidation(key):
     if not bool(key): return False
     elif " " in key: return False
     return True
@@ -74,7 +74,7 @@ def Run(options_input):
                         if not replacedFile:
                             break
 
-                    if PasswordValidation(privateKey):
+                    if PrivateKeyValidation(privateKey):
                         if not Exists(file):
                             print(f"\n>>> O arquivo '{fileName}' pode ter sido Excluído (ou modificado)\n")
                             break
@@ -107,9 +107,9 @@ def Run(options_input):
                             break
                     else:
                         maxPrivateKeyAttempts -= 1
-                        print("\n>>> Senha Inválida")
+                        print("\n>>> Chave Privada Inválida")
                 else:
-                    print("\n>>> Você atingiu o limite das tentativas de senha!")
+                    print("\n>>> Você atingiu o limite das tentativas de chave privada!")
 
     elif int(options_input) == 4:
         os.system('cls' if os.name == 'nt' else 'clear')
